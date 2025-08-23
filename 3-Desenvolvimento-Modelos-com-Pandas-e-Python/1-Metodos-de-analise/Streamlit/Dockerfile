@@ -1,17 +1,24 @@
-# Use Python 3.10
 FROM python:3.10-slim
 
-# Define diretório de trabalho
+# Diretório de trabalho
 WORKDIR /app
 
-# Copia os arquivos de dependências
-COPY requirements.txt .
+# Instalar ferramentas de build
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    python3-dev \
+    libpq-dev \
+    gcc \
+    && rm -rf /var/lib/apt/lists/*
 
-# Instala dependências
+# Copiar requirements e instalar
+COPY requirements.txt .
+RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copia todo o código para o container
+# Copiar código
 COPY . .
 
-# Comando para rodar o Streamlit
-CMD ["streamlit", "run", "script.py", "--server.port", "8000", "--server.address", "0.0.0.0"]
+# Rodar Streamlit na porta dinâmica
+CMD ["streamlit", "run", "script.py", "--server.port", "$PORT", "--server.address", "0.0.0.0"]
+
