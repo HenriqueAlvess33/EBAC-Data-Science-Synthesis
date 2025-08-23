@@ -27,9 +27,6 @@ import matplotlib.pyplot as plt
 import statsmodels.api as sm
 import statsmodels.formula.api as smf
 
-# Análise exploratória
-from ydata_profiling import ProfileReport
-
 # Machine Learning
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error, r2_score
