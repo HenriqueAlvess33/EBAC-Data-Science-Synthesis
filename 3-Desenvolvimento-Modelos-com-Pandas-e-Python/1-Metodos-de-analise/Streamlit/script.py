@@ -23,6 +23,9 @@ from IPython.display import (
 import seaborn as sns
 import matplotlib.pyplot as plt
 
+# Análise exploratória
+from ydata_profiling import ProfileReport
+
 # Modelagem estatística
 import statsmodels.api as sm
 import statsmodels.formula.api as smf
