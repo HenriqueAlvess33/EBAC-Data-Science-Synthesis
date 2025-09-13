@@ -1,0 +1,1 @@
+Apenas a 1° atividade possui integração com streamlit
