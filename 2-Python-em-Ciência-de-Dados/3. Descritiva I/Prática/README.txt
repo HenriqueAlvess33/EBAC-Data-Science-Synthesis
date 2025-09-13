@@ -1,0 +1,1 @@
+O arquivo script.py serve para visualizar o material construído nas três atividades deste diretório

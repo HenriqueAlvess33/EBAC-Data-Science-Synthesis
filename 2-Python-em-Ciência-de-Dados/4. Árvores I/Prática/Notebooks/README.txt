@@ -1,0 +1,1 @@
+Ambas as atividades deste módulo estão presentes em um único script de streamlit
