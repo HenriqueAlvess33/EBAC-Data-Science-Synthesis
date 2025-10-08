@@ -1,0 +1,1 @@
+O arquivo script.py, serve para demonstrar as atividades em uma interação baseada na biblioteca streamlit, este arquivo já é funcional para ambas as atividades
