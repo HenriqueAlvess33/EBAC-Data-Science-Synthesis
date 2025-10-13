@@ -1,0 +1,687 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Pratique 3</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: undefined; }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-transparentGray { background-color: undefined; }
+.select-value-color-translucentGray { background-color: undefined; }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="1e050f67-97bf-80cc-b53a-fc25e4ab238b" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="https://www.notion.so/icons/apple_yellow.svg"/></div><h1 class="page-title">Pratique 3</h1><p class="page-description"></p></header><div class="page-body"><ol type="1" id="1e050f67-97bf-80cb-b676-fcb6205536c8" class="numbered-list" start="1"><li><mark class="highlight-gray"><strong>Quais são os hyperparâmetros do RF ?</strong></mark></li></ol><ol type="1" id="1e050f67-97bf-8079-95c9-c857867ffedd" class="numbered-list" start="2"><li><mark class="highlight-gray"><strong>Para que serve cada um deles ?</strong></mark></li></ol><hr id="1e050f67-97bf-8062-9dd9-e42330c45bda"/><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Parâmetros</summary><div class="indented"><ul id="1e050f67-97bf-80e6-b587-e6abca657c51" class="bulleted-list"><li style="list-style-type:disc"><code>n_estimators</code> → Número de árvores utilizadas</li></ul><ul id="1e050f67-97bf-8071-a6f2-ed836327b3c6" class="bulleted-list"><li style="list-style-type:disc"><code>criterion: [&quot;gini&quot;, &quot;entropy&quot;, &quot;log_loss&quot;], default=&quot;gini&quot; </code>→ Função utilizada para mensurar a qualidade de uma divisão, o método mais utilizado, atuando como padrão seria o gini que se baseia na impureza de gini<table id="1e050f67-97bf-80e6-ba7c-eeed7e423ccf" class="simple-table"><tbody><tr id="1e050f67-97bf-8039-80c0-f6586c17736b"><td id="}[}T" class="">Criterion</td><td id="ck}l" class="">Interpretação</td><td id="btV[" class="">Performance</td><td id="QYv;" class="">Probabilidades boas?</td></tr><tr id="1e050f67-97bf-80c9-9311-d26f5d425b75"><td id="}[}T" class=""><code>gini</code></td><td id="ck}l" class="">Impureza simples</td><td id="btV[" class="">Rápido</td><td id="QYv;" class="">Regular</td></tr><tr id="1e050f67-97bf-80ca-95ab-e241498eb8df"><td id="}[}T" class=""><code>entropy</code></td><td id="ck}l" class="">Informação (mais preciso)</td><td id="btV[" class="">Médio</td><td id="QYv;" class="">Levemente melhor</td></tr><tr id="1e050f67-97bf-8011-8d7a-f0ad11e7a571"><td id="}[}T" class=""><code>log_loss</code></td><td id="ck}l" class="">Otimiza probabilidade predita</td><td id="btV[" class="">Mais lento</td><td id="QYv;" class="">Sim, muito melhor</td></tr></tbody></table></li></ul><ul id="1e050f67-97bf-8026-af18-eb0caf427274" class="bulleted-list"><li style="list-style-type:disc"><code>max_depth, default=None</code> → Informa a profundidade da árvore, caso seja deixado no valor padrão de <code>None</code>, os nós irão se dividir até que as folhas estejam totalmente puras, ou até atingirem o valor mínimo de amostras por divisão.</li></ul><ul id="1e050f67-97bf-8003-95b2-d3f6ff422d3c" class="bulleted-list"><li style="list-style-type:disc"><code>min_samples_split: int or float, default=2</code> → O número mínimo de amostras necessárias para se dividir um nó. Caso seja do tipo de dado <code>int</code> , então o valor dado em <code>min_samples_split</code> é o determinado para mínimo de amostras nas folhas, caso seja do tipo <code>float</code>, então o número mínimo de amostras é determinado pela seguinte operação <code>ceil(min_samples_split * n_samples)</code></li></ul><ul id="1e050f67-97bf-8043-9310-c1647e1de1db" class="bulleted-list"><li style="list-style-type:disc"><code>min_samples_leaf: int or float, default=1</code> → Número mínimo de amostras por folha, ao se realizar o último split, ambas as folhas necessitam estar com o número mínimo de amostras, caso contrário ambas são desconsideradas e retornam para o momento prévio a divisão. Caso seja do tipo de dado <code>int</code> , então o valor dado em <code>min_samples_split</code> é o determinado para mínimo de amostras nas folhas, caso seja do tipo <code>float</code>, então o número mínimo de amostras é determinado pela seguinte operação <code>ceil(min_samples_split * n_samples)</code></li></ul><ul id="1e050f67-97bf-8004-a25e-f4254c05204a" class="bulleted-list"><li style="list-style-type:disc"><code>min_weight_fraction_leaf: float, default=0.0</code><ul id="1e050f67-97bf-807e-80ac-d9d955711c04" class="bulleted-list"><li style="list-style-type:circle">Como funciona?<p id="1e050f67-97bf-80ce-adc8-fb6e6b516934" class="">Ao invés de contar o número de amostras como <code>min_samples_leaf</code>, ele usa o <strong>peso</strong> das amostras (caso você esteja usando o parâmetro <code>sample_weight</code> no <code>fit()</code>).</p><p id="1e050f67-97bf-8041-a76c-dfa980a9c41a" class="">Então:</p></li></ul><ul id="1e050f67-97bf-8002-b8d6-f09651e46ff5" class="bulleted-list"><li style="list-style-type:circle">Cada divisão precisa deixar, <strong>em cada lado</strong>, pelo menos uma fração <code>min_weight_fraction_leaf</code> do <strong>peso total</strong> dos dados de treino.</li></ul><ul id="1e050f67-97bf-800a-bd25-c111dd6ce18c" class="bulleted-list"><li style="list-style-type:circle">Exemplo prático:<p id="1e050f67-97bf-80a4-82be-c59854290d3a" class="">Se você tem:</p><p id="1e050f67-97bf-80a9-974e-f7cade8ed0fc" class="">1000 amostras</p><p id="1e050f67-97bf-8028-b33c-d416b763a7a3" class="">peso total (somando tudo): <strong>1000</strong> (se cada uma tem peso 1)</p><p id="1e050f67-97bf-8034-a332-c2ea90230e6d" class=""><code>min_weight_fraction_leaf = 0.02</code></p><p id="1e050f67-97bf-806c-8ec1-e574a93e9994" class="">→ Cada folha precisa conter <strong>pelo menos 2% do peso total</strong>, ou seja, <strong>20 unidades de peso</strong>.</p></li></ul></li></ul><ul id="1e050f67-97bf-80c0-bcfe-ddc21f14fb1e" class="bulleted-list"><li style="list-style-type:disc"><code>max_features: [”sqrt”, “log2”, None], int or float, default=”sqrt”</code> → <ul id="1e050f67-97bf-8051-a0a1-c3122bf04b87" class="bulleted-list"><li style="list-style-type:circle"><strong>O número de atributos a considerar ao procurar o melhor split:</strong><ul id="1e050f67-97bf-80a3-9655-f4d0dc9f63cd" class="bulleted-list"><li style="list-style-type:square">Se for um <strong>número inteiro (</strong><code><strong>int</strong></code><strong>)</strong>, então serão considerados exatamente <code>max_features</code> atributos em cada divisão.</li></ul><ul id="1e050f67-97bf-8063-aed3-d25b4804ef9b" class="bulleted-list"><li style="list-style-type:square">Se for um <strong>número decimal (</strong><code><strong>float</strong></code><strong>)</strong>, então <code>max_features</code> representa uma <strong>fração</strong>, e serão considerados<p id="1e050f67-97bf-80cf-b158-fab2e76ccd26" class=""><code>max(1, int(max_features * n_features_in_))</code>  atributos em cada divisão.</p></li></ul><ul id="1e050f67-97bf-8009-8386-f1ab4a4b83a2" class="bulleted-list"><li style="list-style-type:square">Se for <code>&quot;sqrt&quot;</code>, então <code>max_features = sqrt(n_features)</code>.</li></ul><ul id="1e050f67-97bf-80ef-aecd-c3ec90289702" class="bulleted-list"><li style="list-style-type:square">Se for <code>&quot;log2&quot;</code>, então <code>max_features = log₂(n_features)</code>.</li></ul><ul id="1e050f67-97bf-8044-a675-cdf48bc5f916" class="bulleted-list"><li style="list-style-type:square">Se for <code>None</code>, então <code>max_features = n_features</code>.</li></ul></li></ul></li></ul><ul id="1e050f67-97bf-80f6-81f5-c8d90d297c6f" class="bulleted-list"><li style="list-style-type:disc"><code>max_leaf_nodes: int, default=None</code> → Defini um número máximo de nós, definido como <code>None</code> é entendido como um número ilimitado</li></ul><ul id="1e050f67-97bf-8072-879a-c90146bdea09" class="bulleted-list"><li style="list-style-type:disc"><code>min_impurity_decrease: float, default=0.0</code> <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1e050f67-97bf-8085-afbf-eea51a675aaf" class="code"><code class="language-Python">N_t / N * (impurity - N_t_R / N_t * right_impurity
+                    - N_t_L / N_t * left_impurity)</code></pre><p id="1e050f67-97bf-80bd-bcbd-e88d400b34d2" class="">Essa fórmula mede <strong>quanto a divisão ajuda a reduzir a impureza total</strong>, levando em conta o <strong>tamanho dos nós filhos</strong> e os <strong>pesos das amostras</strong> (se houver).</p><p id="1e050f67-97bf-80df-96ad-cf4062095b8d" class="">Se essa redução for <strong>maior ou igual ao </strong><code><strong>min_impurity_decrease</strong></code>, a divisão é <strong>aceita</strong>.</p></li></ul><ul id="1e050f67-97bf-80a2-87b4-dac111be22ca" class="bulleted-list"><li style="list-style-type:disc"><code>bootstrap: bool, default=True</code> → Se setado para False, todo o conjunto de dados será usado na construção de cada árvore</li></ul><ul id="1e050f67-97bf-8002-a7b3-d1faccced9c0" class="bulleted-list"><li style="list-style-type:disc"><code>oob_score: bool or callable, default=False</code> → Disponibiliza os dados “out-of-bag” para serem usados afim de estimar a capacidade de generalização das árvores, por padrão é utilizado accuracy_score para realizar a medição mas é possivel criar funções personalizada para utilizar com a assinatura <code>metric(y_true, y_pred)</code><p id="1e050f67-97bf-8006-bd92-f5c621464ebb" class="">Modelos como <code>RandomForest</code> treinam <strong>várias árvores de forma independente</strong> → perfeito para paralelização!</p><p id="1e050f67-97bf-800b-94e1-f75a8f7c6001" class="">Com <code>n_jobs</code>, você controla <strong>quantos núcleos de CPU</strong> serão usados:</p><table id="1e050f67-97bf-80cd-b44c-dcf741bdd5e2" class="simple-table"><tbody><tr id="1e050f67-97bf-8078-a3f7-fa5823da1071"><td id="XZX&gt;" class="">Valor de <code>n_jobs</code></td><td id="Wnh~" class="">Comportamento</td></tr><tr id="1e050f67-97bf-80de-97a7-fa7b86dab836"><td id="XZX&gt;" class=""><code>1</code> ou <code>None</code></td><td id="Wnh~" class="">Usa só <strong>1 núcleo da CPU</strong></td></tr><tr id="1e050f67-97bf-80f7-8d04-f231d0f07e17"><td id="XZX&gt;" class=""><code>-1</code></td><td id="Wnh~" class="">Usa <strong>todos os núcleos disponíveis</strong></td></tr><tr id="1e050f67-97bf-8053-9309-e16033a3bd50"><td id="XZX&gt;" class=""><code>2</code>, <code>4</code>, etc.</td><td id="Wnh~" class="">Usa <strong>2</strong>, <strong>4</strong>, etc. núcleos</td></tr></tbody></table></li></ul><p id="1e050f67-97bf-80e8-8340-f50f2e1e5246" class="">
+</p><ul id="1e050f67-97bf-8046-b365-f77b32495fd1" class="bulleted-list"><li style="list-style-type:disc"> <code>random_state</code>: <em>int</em>, <em>RandomState instance</em> ou <em>None</em>, <em>default=None</em><p id="1e050f67-97bf-807f-b9a0-e89325483368" class="">Controla a aleatoriedade da amostragem com reposição dos dados (<code>bootstrap=True</code>) durante a construção das árvores, bem como da seleção aleatória de atributos em cada divisão (<code>max_features &lt; n_features</code>).</p><p id="1e050f67-97bf-807c-85bc-da359a8f93b6" class="">Atribuir um valor fixo (ex: <code>random_state=42</code>) garante a reprodutibilidade dos resultados, essencial em experimentos científicos ou comparações entre modelos.</p></li></ul><ul id="1e050f67-97bf-80e4-9349-dd95ec93d717" class="bulleted-list"><li style="list-style-type:disc"> <code>verbose</code>: <em>int</em>, <em>default=0</em></li></ul><p id="1e050f67-97bf-80ed-bf27-eb1e38400ce1" class="">Controla o nível de verbosidade durante a execução dos métodos <code>fit</code> e <code>predict</code>.</p><ul id="1e050f67-97bf-80be-ba1c-dd34d7e0e8ba" class="bulleted-list"><li style="list-style-type:disc"><code>0</code>: execução silenciosa (padrão).</li></ul><ul id="1e050f67-97bf-80d0-8d5e-c982bdc0f194" class="bulleted-list"><li style="list-style-type:disc">Valores inteiros maiores: maior detalhamento dos logs impressos no terminal, útil para depuração ou monitoramento do progresso do treinamento.</li></ul><ul id="1e050f67-97bf-802f-a5a7-e24270b455e5" class="bulleted-list"><li style="list-style-type:disc"><code>warm_start</code>: <em>bool</em>, <em>default=False</em></li></ul><p id="1e050f67-97bf-80b2-a119-c394f328d878" class="">Quando configurado como <code>True</code>, reutiliza a solução da chamada anterior do método <code>fit</code>, acrescentando mais estimadores (árvores) ao conjunto. Caso contrário, um novo modelo é treinado do zero.</p><p id="1e050f67-97bf-8016-ae27-f90237094ec9" class="">Este parâmetro é útil para <em>treinamento incremental</em> ou <em>ajuste progressivo</em> do número de estimadores.</p><ul id="1e050f67-97bf-80b4-bb05-e836240e0281" class="bulleted-list"><li style="list-style-type:disc"><code>class_weight</code>: {“balanced”, “balanced_subsample”}, <em>dict</em> ou <em>list of dicts</em>, <em>default=None</em><p id="1e050f67-97bf-804e-ba55-caadfda1fe61" class="">Define os pesos atribuídos a cada classe.</p><ul id="1e050f67-97bf-801b-92f6-d5ece3706cb6" class="bulleted-list"><li style="list-style-type:circle">Se <code>None</code>, todas as classes recebem peso 1.</li></ul><ul id="1e050f67-97bf-8006-974a-f1c2f059df3c" class="bulleted-list"><li style="list-style-type:circle"><code>&quot;balanced&quot;</code>: calcula pesos automaticamente com base na frequência inversa das classes, segundo a fórmula:<p id="1e050f67-97bf-80fc-9210-da4f1e6383d2" class=""><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mrow><mi>p</mi><mi>e</mi><mi>s</mi><mi>o</mi></mrow><mi>c</mi></msub><mo>=</mo><mfrac><msub><mi>n</mi><mtext>amostras</mtext></msub><mrow><msub><mi>n</mi><mtext>classes</mtext></msub><mo>×</mo><mtext>freq</mtext><mo stretchy="false">(</mo><mi>c</mi><mo stretchy="false">)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">{peso}_c = \frac{n_{\text{amostras}}}{n_{\text{classes}} \times \text{freq}(c)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6747em;vertical-align:-0.2441em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">p</span><span class="mord mathnormal">eso</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.0573em;"><span style="top:-2.4559em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">c</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2441em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.2315em;vertical-align:-0.52em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.7115em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3448em;"><span style="top:-2.3488em;margin-left:0em;margin-right:0.0714em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">classes</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.1512em;"><span></span></span></span></span></span></span><span class="mbin mtight">×</span><span class="mord text mtight"><span class="mord mtight">freq</span></span><span class="mopen mtight">(</span><span class="mord mathnormal mtight">c</span><span class="mclose mtight">)</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.4101em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2963em;"><span style="top:-2.357em;margin-left:0em;margin-right:0.0714em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">amostras</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.52em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span><span>﻿</span></span></p></li></ul><ul id="1e050f67-97bf-807a-8526-c49e61936673" class="bulleted-list"><li style="list-style-type:circle"><code>&quot;balanced_subsample&quot;</code>: aplica o mesmo cálculo acima, mas com base apenas nas amostras selecionadas no bootstrap de cada árvore.</li></ul><ul id="1e050f67-97bf-8082-b876-c1d5bde1aa2a" class="bulleted-list"><li style="list-style-type:circle"><code>dict</code>: permite especificar manualmente os pesos (ex: <code>{0: 1, 1: 5}</code>).</li></ul><ul id="1e050f67-97bf-8021-aaa6-e0a8a94edcb4" class="bulleted-list"><li style="list-style-type:circle"><code>list of dicts</code>: usado para problemas <em>multioutput</em>, sendo fornecido um dicionário por coluna de saída.<p id="1e050f67-97bf-80cc-b7e6-ecef5b84fb39" class="">Os pesos especificados serão multiplicados por <code>sample_weight</code> caso este seja informado durante o <code>fit</code>.</p></li></ul></li></ul><ul id="1e050f67-97bf-8089-828b-f8c9d5b63576" class="bulleted-list"><li style="list-style-type:disc"><code>ccp_alpha</code>: <em>float</em> ≥ 0.0, <em>default=0.0</em><p id="1e050f67-97bf-8031-87f6-fcf2b69c020b" class="">Parâmetro de poda baseado na complexidade da árvore (<em>Cost-Complexity Pruning</em>).</p><p id="1e050f67-97bf-80a7-b531-e2fbed31877e" class="">Controla o nível de poda aplicado após o treinamento. Subárvores com custo-complexidade inferior ao <code>ccp_alpha</code> são eliminadas.</p><p id="1e050f67-97bf-807b-b558-cecde2baf159" class="">Quanto maior o valor de <code>ccp_alpha</code>, mais agressiva será a poda, resultando em modelos mais simples e, potencialmente, com menor overfit.</p></li></ul></div></details><p id="1e050f67-97bf-80d5-996e-ccb48e7dcdc1" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
