@@ -1,0 +1,1 @@
+A tarefa contém uma visualização em streamlit em sua resolução, não houve necessidade de realizar uma adaptação posterior
