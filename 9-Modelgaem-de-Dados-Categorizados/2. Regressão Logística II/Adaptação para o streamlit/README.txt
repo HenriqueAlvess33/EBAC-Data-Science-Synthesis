@@ -1,0 +1,1 @@
+A segunda tarefa já possui integração com o streamlit
