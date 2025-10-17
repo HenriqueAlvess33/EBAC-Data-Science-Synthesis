@@ -4,7 +4,7 @@
 ├── model_final.pkl        			# Modelo treinado (gerado automaticamente)
 
 
- Funcionalidades
+Funcionalidades
 
 Análise de Dados
 
