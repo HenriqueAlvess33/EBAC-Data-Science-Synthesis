@@ -11,6 +11,9 @@ from statsmodels.tools.tools import add_constant
 from statsmodels.stats.outliers_influence import variance_inflation_factor as vif
 from patsy import dmatrix
 import io
+import pickle
+import json
+from datetime import datetime
 
 # Configuração da página
 st.set_page_config(page_title="Credit Scoring Analysis", layout="wide")
@@ -29,6 +32,16 @@ uploaded_file = st.sidebar.file_uploader(
     type=['ftr'],
     help="Selecione o arquivo feather contendo os dados de credit scoring"
 )
+
+# Variáveis globais para armazenar modelo e dados
+if 'modelo_treinado' not in st.session_state:
+    st.session_state.modelo_treinado = None
+if 'df_treino_processado' not in st.session_state:
+    st.session_state.df_treino_processado = None
+if 'df_teste_processado' not in st.session_state:
+    st.session_state.df_teste_processado = None
+if 'dict_bins' not in st.session_state:
+    st.session_state.dict_bins = None
 
 # Funções auxiliares (mantidas do código original)
 def atualizar_metadados(df):
@@ -95,6 +108,20 @@ def IV(variavel, resposta):
     tab['iv_parcial'] = (tab.pct_evento - tab.pct_nao_evento)*tab.woe
     return tab['iv_parcial'].sum()
 
+# Funções para download
+def converter_df_para_csv(df):
+    return df.to_csv(index=False).encode('utf-8')
+
+def salvar_modelo(modelo, dict_bins, metadados):
+    modelo_data = {
+        'modelo': modelo,
+        'dict_bins': dict_bins,
+        'metadados': metadados,
+        'data_treinamento': datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        'versao': '1.0'
+    }
+    return pickle.dumps(modelo_data)
+
 # Processamento principal
 if uploaded_file is not None:
     try:
@@ -102,11 +129,12 @@ if uploaded_file is not None:
         df_original = pd.read_feather(uploaded_file)
         
         # Abas principais
-        tab1, tab2, tab3, tab4 = st.tabs([
+        tab1, tab2, tab3, tab4, tab5 = st.tabs([
             "📈 Visão Geral", 
             "🔍 Análise Descritiva", 
             "🤖 Modelagem", 
-            "📊 Resultados"
+            "📊 Resultados",
+            "💾 Download"
         ])
 
         with tab1:
@@ -246,6 +274,11 @@ if uploaded_file is not None:
                     
                     modelo = smf.logit(f'mau ~ {formula}', df_treino_1).fit()
                     
+                    # Armazenar modelo e dados na session state
+                    st.session_state.modelo_treinado = modelo
+                    st.session_state.df_treino_processado = df_treino_1
+                    st.session_state.dict_bins = dict_bins
+                    
                     st.success("Modelo treinado com sucesso!")
                     st.subheader("Resumo do Modelo")
                     st.text(str(modelo.summary()))
@@ -253,7 +286,11 @@ if uploaded_file is not None:
         with tab4:
             st.header("Avaliação do Modelo")
             
-            if 'modelo' in locals():
+            if st.session_state.modelo_treinado is not None:
+                modelo = st.session_state.modelo_treinado
+                df_treino_1 = st.session_state.df_treino_processado
+                dict_bins = st.session_state.dict_bins
+                
                 # Preparação da base OOT
                 df_teste = df_oot.copy()
                 
@@ -266,6 +303,9 @@ if uploaded_file is not None:
                     columns=['renda', 'qt_pessoas_residencia', 'qtd_filhos', 'tempo_emprego'], 
                     inplace=True
                 )
+                
+                # Armazenar dados de teste processados
+                st.session_state.df_teste_processado = df_teste
                 
                 # Avaliação
                 col1, col2 = st.columns(2)
@@ -299,6 +339,129 @@ if uploaded_file is not None:
                 ax.set_title('Curva ROC')
                 ax.legend()
                 st.pyplot(fig)
+            else:
+                st.info("Treine o modelo primeiro na aba 'Modelagem' para ver os resultados.")
+
+        with tab5:
+            st.header("💾 Download de Arquivos")
+            
+            col1, col2 = st.columns(2)
+            
+            with col1:
+                st.subheader("Download do Dataset")
+                
+                # Dataset original
+                csv_original = converter_df_para_csv(df_original)
+                st.download_button(
+                    label="📥 Download Dataset Original (CSV)",
+                    data=csv_original,
+                    file_name="credit_scoring_dataset_original.csv",
+                    mime="text/csv",
+                    help="Baixe o dataset original completo em formato CSV"
+                )
+                
+                # Dataset de treino processado
+                if st.session_state.df_treino_processado is not None:
+                    csv_treino = converter_df_para_csv(st.session_state.df_treino_processado)
+                    st.download_button(
+                        label="📥 Download Dataset Treino Processado (CSV)",
+                        data=csv_treino,
+                        file_name="credit_scoring_treino_processado.csv",
+                        mime="text/csv",
+                        help="Baixe o dataset de treino após processamento e feature engineering"
+                    )
+                
+                # Dataset de teste processado
+                if st.session_state.df_teste_processado is not None:
+                    csv_teste = converter_df_para_csv(st.session_state.df_teste_processado)
+                    st.download_button(
+                        label="📥 Download Dataset Teste Processado (CSV)",
+                        data=csv_teste,
+                        file_name="credit_scoring_teste_processado.csv",
+                        mime="text/csv",
+                        help="Baixe o dataset de teste (OOT) após processamento"
+                    )
+            
+            with col2:
+                st.subheader("Download do Modelo")
+                
+                if st.session_state.modelo_treinado is not None:
+                    # Preparar dados do modelo para download
+                    modelo_data = salvar_modelo(
+                        st.session_state.modelo_treinado,
+                        st.session_state.dict_bins,
+                        metadados_02
+                    )
+                    
+                    st.download_button(
+                        label="🤖 Download Modelo Treinado (PKL)",
+                        data=modelo_data,
+                        file_name=f"credit_scoring_model_{datetime.now().strftime('%Y%m%d_%H%M')}.pkl",
+                        mime="application/octet-stream",
+                        help="Baixe o modelo treinado com todos os parâmetros e bins"
+                    )
+                    
+                    # Download dos parâmetros do modelo em JSON
+                    params_json = json.dumps({
+                        'data_treinamento': datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                        'n_observacoes_treino': len(st.session_state.df_treino_processado),
+                        'variaveis_utilizadas': iv_aprovado,
+                        'metricas_treino': poder_de_predicao(st.session_state.df_treino_processado, st.session_state.modelo_treinado)
+                    }, indent=2)
+                    
+                    st.download_button(
+                        label="📋 Download Metadados do Modelo (JSON)",
+                        data=params_json,
+                        file_name="modelo_metadados.json",
+                        mime="application/json",
+                        help="Baixe os metadados e parâmetros do modelo"
+                    )
+                else:
+                    st.info("Treine o modelo primeiro para habilitar o download.")
+            
+            st.subheader("📊 Relatórios e Análises")
+            
+            # Relatório de métricas
+            if st.session_state.modelo_treinado is not None:
+                col1, col2 = st.columns(2)
+                
+                with col1:
+                    # Relatório de performance
+                    relatorio_performance = f"""
+                    RELATÓRIO DE PERFORMANCE DO MODELO
+                    Data: {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
+                    
+                    MÉTRICAS DE TREINO:
+                    {chr(10).join([f'{k}: {v}' for k, v in poder_de_predicao(st.session_state.df_treino_processado, st.session_state.modelo_treinado).items()])}
+                    
+                    MÉTRICAS DE TESTE (OOT):
+                    {chr(10).join([f'{k}: {v}' for k, v in poder_de_predicao(st.session_state.df_teste_processado, st.session_state.modelo_treinado).items()])}
+                    
+                    VARIÁVEIS UTILIZADAS: {len(iv_aprovado)}
+                    """
+                    
+                    st.download_button(
+                        label="📄 Download Relatório de Performance (TXT)",
+                        data=relatorio_performance,
+                        file_name="relatorio_performance_modelo.txt",
+                        mime="text/plain",
+                        help="Baixe um relatório resumido com as métricas de performance do modelo"
+                    )
+                
+                with col2:
+                    # Download dos bins utilizados
+                    bins_json = json.dumps(
+                        {k: v.tolist() if hasattr(v, 'tolist') else str(v) for k, v in st.session_state.dict_bins.items()},
+                        indent=2
+                    )
+                    
+                    st.download_button(
+                        label="📐 Download Bins das Variáveis (JSON)",
+                        data=bins_json,
+                        file_name="variaveis_bins.json",
+                        mime="application/json",
+                        help="Baixe os pontos de corte utilizados para discretização das variáveis"
+                    )
 
     except Exception as e:
         st.error(f"Erro ao processar o arquivo: {str(e)}")
