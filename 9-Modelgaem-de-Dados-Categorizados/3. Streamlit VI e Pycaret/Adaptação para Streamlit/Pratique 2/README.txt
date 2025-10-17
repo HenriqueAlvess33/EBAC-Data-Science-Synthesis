@@ -3,11 +3,6 @@
 ├── create_model.py       		 	# Script para criar modelo de exemplo
 ├── model_final.pkl        			# Modelo treinado (gerado automaticamente)
 
-Crie o modelo inicial (se necessário)
-No terminal: `python create_model.py`
-
-Acesse no navegador
-http://localhost:8501
 
  Funcionalidades
 
